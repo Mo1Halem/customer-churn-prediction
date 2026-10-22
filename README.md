@@ -40,7 +40,7 @@ For the decision threshold I didn't just maximise F1. I assumed a retention offe
 pip install -r requirements.txt
 ```
 
-Run the notebook top to bottom (put the dataset CSV next to it). That also regenerates `customer_churn_model.pkl`.
+Run the notebook top to bottom (the dataset is included). That also regenerates `customer_churn_model.pkl`.
 
 To score customers:
 
