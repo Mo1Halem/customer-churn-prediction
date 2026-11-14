@@ -29,7 +29,7 @@ def get_model():
 model, threshold, features = get_model()
 
 st.title("Customer Churn Predictor")
-st.write("Describe a telecom customer to see how likely they are to cancel their service.")
+st.write("Describe a telecom customer to see how likely they are to cancel their service. The prediction updates in the sidebar as you change the inputs.")
 
 account, services, profile = st.columns(3)
 
@@ -82,14 +82,14 @@ result = score(customer, model, threshold, features).iloc[0]
 group = str(result["Risk_Group"])
 level, advice = ADVICE[group]
 
-st.divider()
-left, right = st.columns([1, 2])
-left.metric("Churn probability", f"{result['Churn_Probability']:.1%}")
-left.metric("Risk group", group)
-getattr(right, level)(f"**{group}.** {advice}")
-
-st.caption(
-    f"Risk groups: Low below {LOW_RISK_CUTOFF:.0%}, High above {threshold:.0%}. "
-    "Total charges are estimated as months x monthly charges. "
-    "The model finds patterns in past customers; it does not prove what causes a customer to leave."
-)
+with st.sidebar:
+    st.header("Prediction")
+    st.metric("Churn probability", f"{result['Churn_Probability']:.1%}")
+    st.progress(float(result["Churn_Probability"]))
+    st.metric("Risk group", group)
+    getattr(st, level)(f"**{group}.** {advice}")
+    st.caption(
+        f"Risk groups: Low below {LOW_RISK_CUTOFF:.0%}, High above {threshold:.0%}. "
+        "Total charges are estimated as months x monthly charges. "
+        "The model finds patterns in past customers; it does not prove what causes a customer to leave."
+    )
