@@ -38,11 +38,11 @@ What drives churn, from permutation importance and the raw data:
 - Fiber optic customers churn at 41.9%, DSL customers at 19.0%.
 - Paying by electronic check goes with 45.3% churn; other payment methods sit around 15-19%.
 
-![Feature importance](Important%20Features.png)
+![Feature importance](images/Important%20Features.png)
 
-![Calibration curve](Calibration%20Curve.png)
+![Calibration curve](images/Calibration%20Curve.png)
 
-![Risk performance](Risk%20Performance.png)
+![Risk performance](images/Risk%20Performance.png)
 
 ## How it's built
 
