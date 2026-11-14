@@ -1,6 +1,12 @@
 # Customer Churn Prediction
 
+Telecom companies lose customers every month and usually find out too late. This project predicts which customers are likely to leave, so a retention team can act first.
+
 **Live demo:** https://customer-churn-prediction-c3k6tzdacawk9fxsbmy92y.streamlit.app/
+
+Built with Python, pandas, scikit-learn and Streamlit.
+
+![App screenshot](images/app-screenshot.png)
 
 The app may take a few seconds to wake up if it has been idle.
 
@@ -14,18 +20,18 @@ When a telecom customer cancels, the company loses recurring revenue, and keepin
 
 The target is `Churn` (yes/no). Contacting a customer costs money, so plain accuracy isn't the right yardstick. I look at recall and ROC-AUC for the model, and at the net benefit of a retention campaign for the decision.
 
-The data is IBM's Telco Customer Churn sample dataset (also on Kaggle): 7,043 customers and 21 columns. The only missing values are 11 blank `TotalCharges` entries, all for customers with zero months of tenure.
+The data is IBM's Telco Customer Churn sample dataset ([source on Kaggle](https://www.kaggle.com/blastchar/telco-customer-churn)): 7,043 customers and 21 columns. The only missing values are 11 blank `TotalCharges` entries, all for customers with zero months of tenure.
 
 ## What I found
 
-The model ranks customers well but not perfectly. On the 1,409 customers I held out as a test set:
+## What I found
 
-| Metric | Value |
-|---|---|
-| ROC-AUC | 0.845 |
-| Churn recall | 0.71 |
-| Churn precision | 0.56 |
-| F1 (churn class) | 0.63 |
+On the 1,409 customers I held out as a test set, the model ranks customers well but not perfectly:
+
+| Model | ROC-AUC | Churn recall | Churn precision | Churn F1 |
+|---|---|---|---|---|
+| Baseline (predicts nobody churns) | 0.50 | 0.00 | 0.00 | 0.00 |
+| Final: Logistic Regression (threshold 0.35) | 0.845 | 0.71 | 0.56 | 0.63 |
 
 I compared four models with 5-fold cross-validation on the training data. Logistic Regression (AUC 0.848) and Gradient Boosting (0.847) finished level, Random Forest was behind at 0.823, and a single Decision Tree at 0.660 was clearly the weakest. Tuning Gradient Boosting got its CV score to 0.8505, but on the test set it still came out the same as Logistic Regression (0.846 vs 0.845). Since they perform the same, I kept Logistic Regression because its coefficients are easy to explain.
 
