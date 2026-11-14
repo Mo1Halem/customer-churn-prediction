@@ -24,8 +24,6 @@ The data is IBM's Telco Customer Churn sample dataset ([source on Kaggle](https:
 
 ## What I found
 
-## What I found
-
 On the 1,409 customers I held out as a test set, the model ranks customers well but not perfectly:
 
 | Model | ROC-AUC | Churn recall | Churn precision | Churn F1 |
